@@ -1,5 +1,4 @@
 require 'rake'
-require 'rspec/core/rake_task'
 
 
 require ::File.expand_path('../config/environment', __FILE__)
@@ -131,6 +130,9 @@ task "console" do
 end
 
 desc "Run the specs"
-RSpec::Core::RakeTask.new(:spec)
+  task "specs" do
+    require 'rspec/core/rake_task'
+    RSpec::Core::RakeTask.new(:spec)
+  end
 
 task :default  => :specs
