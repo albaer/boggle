@@ -16,24 +16,21 @@ $(document).ready(function() {
 
   $("#user_word_input").on("submit", function(event) {
     event.preventDefault();
-    $("td").removeClass("searching found");
-    console.log(window.currentBoard);
+    $("td").removeClass("found");
     var target = $('input[name=target_word]').val().toUpperCase();
     $('input[name=target_word]').val('');
     boggle = new Solver(window.currentBoard, target);
     var path = boggle.solve();
-    console.log(path)
     if (path.length > 0) {
-    window.setTimeout(function() {
     $.each(path, function(index, position){
-      console.log(position);
-      $("#cell"+position).removeClass("searching");
       $("#cell"+position).addClass("found");
-      })
-    }
-    ,500);
+    });
+    window.setTimeout(function() {
+      $("td").removeClass("found");
+    }, 300);
+
   } else {
-    $("#user_word_input").effect("shake", {distance: 10, times: 2}, 100);
+    $("#user_word_input").effect("shake", {distance: 4, times: 2}, 150);
   };
   });
 });
